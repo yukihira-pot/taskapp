@@ -1,0 +1,10 @@
+{
+	"version": 3,
+	"file": "index.css",
+	"sources": [
+		"index.scss",
+		"setting/color.scss"
+	],
+	"names": [],
+	"mappings": "AAEA,AAAA,EAAE,CAAC;EACC,KAAK,ECHI,OAAO,GDInB"
+}

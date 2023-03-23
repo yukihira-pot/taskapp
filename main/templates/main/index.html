@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load sass_tags %} 
+
+{% block style %}
+
+<link rel="stylesheet" href="{% sass_src 'main/scss/index.scss' %}">
+
+{% endblock style %}
+
+{% block header %}{% endblock header %}
+
+{% block content %}
+
+<a href="{% url 'main:login' %}">ログインへのリンク</a>
+<a href="{% url 'main:signup' %}">新規登録へのリンク</a>
+
+{% endblock content %}
