@@ -9,56 +9,76 @@
 {% block header %}{% endblock header %}
 
 {% block content %}
+
 <h2>{{ username }}のタスクリスト</h2>
 
 <div>
     {% if user.icon %}
-        <img src="{{ user.icon.url }}" alt="アイコン画像" class="task__icon">
+    <img src="{{ user.icon.url }}" alt="アイコン画像" class="task__icon">
     {% else %}
-        <img src="{% static 'main/images/default-icon.png' %}" alt="デフォルトのアイコン画像" class="task__icon">
+    <img src="{% static 'main/images/default-icon.png' %}" alt="デフォルトのアイコン画像" class="task__icon">
     {% endif %}
 </div>
 
+<img src="{% static 'main/images/settings.png' %}" alt="設定" id="settings-image" onclick="toggleVisibility('settings');">
+
+<div id="settings" style="display: none;">
+    <form method="post">
+        {% csrf_token %}
+        {{ usernamechange_form.as_p }}
+        <input type="submit" value="完了">
+    </form>
+</div>
+
+<h3>新しいタスク</h3>
 <form action="{% url 'main:my_tasks' %}" method="post">
     {% csrf_token %}
-    {{ form.non_field_errors }}
+    {{ task_form.non_field_errors }}
     <div class="form-field">
-        {{ form.title.label_tag }}
-        {{ form.title }}
+        {{ task_form.title.label_tag }}
+        {{ task_form.title }}
     </div>
     <div class="form-field">
-        {{ form.content.label_tag }}
-        {{ form.content }}
+        {{ task_form.content.label_tag }}
+        {{ task_form.content }}
     </div>
     <div class="form-field">
-        {{ form.deadline.label_tag }}
-        {{ form.deadline }}
+        {{ task_form.deadline.label_tag }}
+        {{ task_form.deadline }}
     </div>
     <button type="submit">送信</button>
 </form>
 
-{% if not my_tasks_list %}
-    タスクはまだ設定されていません
-{% else %}
-    {% for task in my_tasks_list %}
-    <ul>
-        <li>{{ task.title }}</li>
-        <li>{{ task.content }}</li>
-        {% if task.deadline %}
-            <li>{{ task.deadline }}</li>
-        {% else %}
-            <li>締切なし</li>
-        {% endif %}
-        <li>
-            <form action="{% url 'main:task_delete' task.pk %}" method="post">
-                {% csrf_token %}
-                <input type="submit" value="完了">
-            </form>
-        </li>
-    </ul>
-    {% endfor %}
-{% endif %}
-    
+<h3>タスク一覧</h3>
+<div id="my-tasks">
+    {% if not my_tasks_list %}
+        <p id="task-notset">タスクはまだ設定されていません</p>
+    {% else %}
+        <p id="task-set">現在のタスク</p>
+        {% for task in my_tasks_list %}
+        <ul id="task-{{ task.pk }}">
+            <li>タイトル: {{ task.title }}</li>
+            <li>本文: {{ task.content }}</li>
+            {% if task.deadline %}
+                <li>締切: {{ task.deadline }}</li>
+            {% else %}
+                <li>締切なし</li>
+            {% endif %}
+            <li>
+                <form class="task-delete" action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" value="{{ task.pk }}" class="task-complete">完了</button>
+                </form>
+            </li>
+        </ul>
+        {% endfor %}
+    {% endif %}    
+</div>
 
-    
 {% endblock content %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{% static 'main/js/my-tasks-popup-settings.js' %}"></script>
+<script src="{% static 'main/js/my-tasks-ajax.js' %}"></script>
+{% endblock script %}

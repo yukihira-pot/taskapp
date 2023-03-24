@@ -42,3 +42,15 @@ class TaskCreationForm(ModelForm):
             "content",
             "deadline",
         )
+
+
+class UsernameChangeForm(ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ("username",)
+
+
+class EmailChangeForm(ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ("email",)

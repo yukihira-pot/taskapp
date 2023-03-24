@@ -5,3 +5,15 @@
     height: 100px;
     object-fit: cover;
 }
+
+.task-complete {
+    background-color: rgb(207, 255, 239);
+    border: solid 2px aquamarine;
+    border-radius: 20%;
+}
+
+#settings-image {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}

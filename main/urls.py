@@ -10,5 +10,9 @@ urlpatterns = [
     path("signup/", views.SignUpView.as_view(), name="signup"),
     path("login/", views.MyLoginView.as_view(), name="login"),
     path("my-tasks/", views.TaskListView.as_view(), name="my_tasks"),
-    path("task-delete/<int:pk>/", views.TaskDeleteView.as_view(), name="task_delete"),
+    path("settings/", views.TemplateView.as_view(template_name="main/settings.html")),
+    path(
+        "username_change/", views.UsernameUpdateView.as_view(), name="username_change"
+    ),
+    path("email_change", views.EmailUpdateView.as_view(), name="email_change"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
