@@ -9,7 +9,7 @@
 {% block header %}{% endblock header %}
 
 {% block content %}
-ろぐいん画面だよ
+<a href="{% url 'main:signup' %}">新規登録へ</a>
 <form action="{% url 'main:login' %}" method="post">
     {% csrf_token %}
     {{ form.non_field_errors }}

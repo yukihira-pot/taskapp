@@ -1,0 +1,8 @@
+.task__icon {
+  border: solid 2px black;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover; }
+
+/*# sourceMappingURL=my-tasks.css.map */

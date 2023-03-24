@@ -3,11 +3,62 @@
 {% load sass_tags %} 
 
 {% block style %}
-
+<link rel="stylesheet" href="{% sass_src 'main/scss/my-tasks.scss' %}">
 {% endblock style %}
 
 {% block header %}{% endblock header %}
 
 {% block content %}
-タスクだよ
+<h2>{{ username }}のタスクリスト</h2>
+
+<div>
+    {% if user.icon %}
+        <img src="{{ user.icon.url }}" alt="アイコン画像" class="task__icon">
+    {% else %}
+        <img src="{% static 'main/images/default-icon.png' %}" alt="デフォルトのアイコン画像" class="task__icon">
+    {% endif %}
+</div>
+
+<form action="{% url 'main:my_tasks' %}" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-field">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+    </div>
+    <div class="form-field">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+    </div>
+    <div class="form-field">
+        {{ form.deadline.label_tag }}
+        {{ form.deadline }}
+    </div>
+    <button type="submit">送信</button>
+</form>
+
+{% if not my_tasks_list %}
+    タスクはまだ設定されていません
+{% else %}
+    {% for task in my_tasks_list %}
+    <ul>
+        <li>{{ task.title }}</li>
+        <li>{{ task.content }}</li>
+        {% if task.deadline %}
+            <li>{{ task.deadline }}</li>
+        {% else %}
+            <li>締切なし</li>
+        {% endif %}
+        <li>
+            <form action="{% url 'main:task_delete' task.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="完了">
+            </form>
+        </li>
+    </ul>
+    {% endfor %}
+{% endif %}
+    
+
+    
 {% endblock content %}
