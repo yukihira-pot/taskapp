@@ -29,16 +29,16 @@ $.ajaxSetup({
     }
 });
 
-$('.task-delete').on('submit', function(e) {
+$('.task-complete').on('submit', function(e) {
     e.preventDefault();
 
-    var task_pk = $('.task-complete').val()
+    var task_pk = $('.task-complete-btn').val()
 
     $.ajax({
         'url': '',
         'type': 'POST',
         'data': {
-            "name": "task-delete",
+            "name": "task-complete",
             'task-pk': task_pk,
         },
         'dataType': 'json'

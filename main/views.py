@@ -1,9 +1,10 @@
 from typing import *
-
+from django.utils import timezone
+from datetime import timedelta, datetime
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.db.models import QuerySet
+from django.db.models import QuerySet, F, BooleanField, Case, When
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse, redirect, render
 from django.urls import reverse_lazy
@@ -58,7 +59,14 @@ class TaskListView(LoginRequiredMixin, ListView, ModelFormMixin):
     template_name = "main/my-tasks.html"
 
     def get_queryset(self) -> QuerySet[Any]:
-        queryset = Task.objects.filter(user=self.request.user).order_by("deadline")
+        queryset = Task.objects.filter(user=self.request.user).annotate(
+                remaining_datetime = F("deadline") - timezone.now(),
+                is_deadline_passed=Case(
+                    When(remaining_datetime__lt=timedelta(), then=True),
+                    default=False,
+                    output_field=BooleanField(),
+                ),
+            ).order_by("deadline")
         return queryset
 
     def get_context_data(self, **kwargs) -> Dict[str, Any]:
@@ -81,7 +89,7 @@ class TaskListView(LoginRequiredMixin, ListView, ModelFormMixin):
                 form.save()
                 return redirect("main:my_tasks")
             return redirect("main:my_tasks")
-        elif "task-delete" in self.request.POST["name"]:
+        elif "task-complete" in self.request.POST["name"]:
             delete_pk = int(self.request.POST.get("task-pk"))
             Task.objects.get(pk=delete_pk).delete()
             return JsonResponse({})

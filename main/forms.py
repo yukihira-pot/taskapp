@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 
 from django import forms
 from django.contrib.auth import get_user_model
@@ -29,7 +29,7 @@ class TaskCreationForm(ModelForm):
             date_attrs={"type": "date"},
             time_attrs={"type": "time"},
         ),
-        initial=datetime.datetime.now(),
+        initial=timezone.now()
     )
 
     def __init__(self, *args, **kwargs):

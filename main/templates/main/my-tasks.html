@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load static task_app %}
 {% load static %}
 {% load sass_tags %} 
 
@@ -59,15 +60,26 @@
         <ul id="task-{{ task.pk }}">
             <li>タイトル: {{ task.title }}</li>
             <li>本文: {{ task.content }}</li>
+
             {% if task.deadline %}
                 <li>締切: {{ task.deadline }}</li>
+                {% if task.is_deadline_passed %}
+                    <li>締切を<b>{{ task.remaining_datetime | deadline_passed_elapsed_time }}</b>過ぎています</li>
+                {% else %}
+                    <li>締切まで: {{ task.remaining_datetime | elapsed_time }}</li>
+                {% endif %}
             {% else %}
                 <li>締切なし</li>
-            {% endif %}
+            {% endif %} {# task.deadline #}
+
             <li>
-                <form class="task-delete" action="" method="post">
+                <form class="task-complete" action="" method="post">
                     {% csrf_token %}
-                    <button type="submit" value="{{ task.pk }}" class="task-complete">完了</button>
+                    <button type="submit" value="{{ task.pk }}" class="task-complete-btn">完了</button>
+                </form>
+                <form class="task-edit" action="" method="post">
+                    {% csrf_token %}
+                    <button type="submit" value="{{ task.pk }}" class="task-edit-btn">編集</button>
                 </form>
             </li>
         </ul>

@@ -5,7 +5,7 @@
   height: 100px;
   object-fit: cover; }
 
-.task-complete {
+.task-complete-btn {
   background-color: #cfffef;
   border: solid 2px aquamarine;
   border-radius: 20%; }
