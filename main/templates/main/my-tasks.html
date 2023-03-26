@@ -72,14 +72,14 @@
                 <li>締切なし</li>
             {% endif %} {# task.deadline #}
 
-            <li>
+            <li class="task-complete-delete__container">
                 <form class="task-complete" action="" method="post">
                     {% csrf_token %}
                     <button type="submit" value="{{ task.pk }}" class="task-complete__btn">完了</button>
                 </form>
                 <form class="task-edit" action="" method="post">
                     {% csrf_token %}
-                    <button type="submit" value="{{ task.pk }}" class="task-edit-btn">編集</button>
+                    <button type="submit" value="{{ task.pk }}" class="task-edit__btn">編集</button>
                 </form>
             </li>
         </ul>
