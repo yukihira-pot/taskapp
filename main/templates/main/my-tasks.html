@@ -75,7 +75,7 @@
             <li>
                 <form class="task-complete" action="" method="post">
                     {% csrf_token %}
-                    <button type="submit" value="{{ task.pk }}" class="task-complete-btn">完了</button>
+                    <button type="submit" value="{{ task.pk }}" class="task-complete__btn">完了</button>
                 </form>
                 <form class="task-edit" action="" method="post">
                     {% csrf_token %}

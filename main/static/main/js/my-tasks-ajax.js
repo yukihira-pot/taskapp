@@ -32,7 +32,8 @@ $.ajaxSetup({
 $('.task-complete').on('submit', function(e) {
     e.preventDefault();
 
-    var task_pk = $('.task-complete-btn').val()
+    // 受け取った .task-complete 要素に対して、その .task-complete__btn の値を取得する
+    var task_pk = $(this).find('.task-complete__btn').val();
 
     $.ajax({
         'url': '',
