@@ -27,7 +27,6 @@ from .forms import (
 )
 from .models import Task
 
-
 class IndexView(TemplateView):
     """インデックス画面を表示するためのビュー"""
 

@@ -77,9 +77,17 @@
                     {% csrf_token %}
                     <button type="submit" value="{{ task.pk }}" class="task-complete__btn">完了</button>
                 </form>
-                <form class="task-edit" action="" method="post">
+            </li>
+            <li class="task-complete-edit__container">
+                <button type="submit" value="{{ task.pk }}" class="task-edit__btn" onclick="toggleVisibility('task-edit__form-{{ task.id }}');">編集</button>
+                <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post" style="display: none;">
                     {% csrf_token %}
-                    <button type="submit" value="{{ task.pk }}" class="task-edit__btn">編集</button>
+                    {{ task_form.non_field_errors }}
+                    <p>タイトル: <input type="text" name="title" maxlength="256" required="" id="id_title" value="{{ task.title }}"></p>
+                    <p>内容: <input type="text" name="content" id="id_content" value="{{ task.content }}"></p>
+                    <p>締切: <input type="date" name="deadline_0" value="{{ task.deadline | extract_date_from_datetime }}" required="" id="id_deadline_0">
+                    <input type="time" name="deadline_1" value="{{ task.deadline | extract_time_from_datetime }}" required="" id="id_deadline_1"></p>
+                    <button type="submit" value="{{ task.pk }}" class="task-edit__submit-btn">変更</button>
                 </form>
             </li>
         </ul>

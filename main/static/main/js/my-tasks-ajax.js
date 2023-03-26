@@ -29,6 +29,7 @@ $.ajaxSetup({
     }
 });
 
+// タスク完了ボタンを押したとき
 $('.task-complete').on('submit', function(e) {
     e.preventDefault();
 
@@ -51,3 +52,10 @@ $('.task-complete').on('submit', function(e) {
         }
     });
 });
+
+// // タスク編集ボタンを押したとき
+// $('.task-edit').on('submit', function(e) {
+//     e.preventDefault();
+
+//     // 
+// })

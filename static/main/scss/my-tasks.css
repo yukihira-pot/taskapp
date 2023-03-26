@@ -8,14 +8,18 @@
 .task-complete-delete__container {
   display: flex; }
   .task-complete-delete__container .task-complete__btn {
-    margin-right: 2px;
+    margin-bottom: 2px;
     background-color: #cfffef;
     border: solid 2px aquamarine;
     border-radius: 20%; }
-  .task-complete-delete__container .task-edit__btn {
-    background-color: #b2f1ff;
-    border: solid 2px #38ebff;
-    border-radius: 20%; }
+
+.task-complete-edit__container .task-edit__btn {
+  background-color: #b2f1ff;
+  border: solid 2px #38ebff;
+  border-radius: 20%; }
+
+.task-edit__form {
+  background-color: azure; }
 
 #settings-image {
   width: 50px;

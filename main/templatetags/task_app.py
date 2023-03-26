@@ -1,6 +1,7 @@
 from django import template
 from django.utils import timezone
 from datetime import timedelta
+import datetime
 register = template.Library()
 
 @register.filter
@@ -45,3 +46,13 @@ def deadline_passed_elapsed_time(dt):
     else:
         passed_time = f"{-dt.days}日"
     return passed_time
+
+@register.filter
+def extract_date_from_datetime(dt: datetime.datetime):
+    dt = timezone.localdate(dt)
+    return dt.strftime("%Y-%m-%d")
+
+@register.filter
+def extract_time_from_datetime(dt: datetime.datetime):
+    dt = timezone.localtime(dt)
+    return dt.strftime("%H:%M")
