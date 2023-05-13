@@ -14,6 +14,7 @@ class Task(models.Model):
     update_at = models.DateTimeField(verbose_name="更新日時", auto_now_add=True)
     # 後から付け足した項目のため null=True にする。締切を設けないタスクを許容するため blank=True にする。
     deadline = models.DateTimeField(verbose_name="締切日時", null=True, blank=True)
+    is_completed = models.BooleanField(verbose_name="完了済", null=True, blank=True, default=False)
 
     class Meta:
         verbose_name_plural = "Task"

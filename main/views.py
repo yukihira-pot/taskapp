@@ -91,7 +91,7 @@ class TaskListView(LoginRequiredMixin, ListView, ModelFormMixin):
         elif "task-complete" in self.request.POST["name"]:
             delete_pk = int(self.request.POST.get("task-pk"))
             print("delete_pk: ", delete_pk)
-            Task.objects.get(pk=delete_pk).delete()
+            Task.objects.get(pk=delete_pk).is_completed = True
             return JsonResponse({})
 
 
