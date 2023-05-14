@@ -11,7 +11,7 @@
 
 {% block content %}
 
-<h2>{{ username }}のタスクリスト</h2>
+<h2>{{ username }} のタスクリスト</h2>
 
 <div>
     {% if user.icon %}
@@ -66,20 +66,19 @@
             {% for task in my_tasks_list %}
                 {% if task.is_completed == False %}
                 <tr id="task-{{ task.pk }}">
-                    <td>{{ task.title }}</td>
-                    <td>{{ task.content }}</td>
+                    <td class="task-title">{{ task.title }}</td>
+                    <td class="task-content">{{ task.content }}</td>
 
                     {% if task.deadline %}
-                        <td>{{ task.deadline }}</td>
+                        <td class="task-deadline">{{ task.deadline }}</td>
                         {% if task.is_deadline_passed %}
-                            <td><b>{{ task.remaining_datetime | deadline_passed_elapsed_time }}</b>過ぎています</td>
+                            <td class="task-remaining-datetime"><b>{{ task.remaining_datetime | deadline_passed_elapsed_time }}</b>過ぎています</td>
                         {% else %}
-                            <td>締切まで: {{ task.remaining_datetime | elapsed_time }}</td>
+                            <td class="task-remaining-datetime">締切まで: {{ task.remaining_datetime | elapsed_time }}</td>
                         {% endif %}
                     {% else %}
-                        <td>締切なし</td>
+                        <td class="task-no-deadline">締切なし</td>
                     {% endif %} {# task.deadline #}
-
 
                     <td class="task-complete-delete__container">
                         <form class="task-complete" action="" method="post">
@@ -96,21 +95,21 @@
             {% endfor %}
         </table>
         {% for task in my_tasks_list %}
-        <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post" style="display: none; position: absolute;">
-            {% csrf_token %}
-            {{ task_form.non_field_errors }}
-            <p class="task-edit__form__content">
-                タイトル: <input class="task-edit__form__content"  type="text" name="title" maxlength="256" required="" id="id_title" value="{{ task.title }}">
-            </p>
-            <p class="task-edit__form__content">
-                内容: <input class="task-edit__form__content" type="text" name="content" id="id_content" value="{{ task.content }}">
-            </p>
-            <p class="task-edit__form__content">
-                締切: <input class="task-edit__form__content" type="date" name="deadline_0" value="{{ task.deadline | extract_date_from_datetime }}" required="" id="id_deadline_0">
-            <input type="time" name="deadline_1" value="{{ task.deadline | extract_time_from_datetime }}" required="" id="id_deadline_1">
-            </p>
-            <button  class="task-edit__form__content" type="submit" value="{{ task.pk }}" class="task-edit__submit-btn">変更</button>
-        </form>
+            <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post" style="display: none; position: absolute;">
+                {% csrf_token %}
+                {{ task_form.non_field_errors }}
+                <p class="task-edit__form__content">
+                    タイトル: <input class="task-edit__form__content"  type="text" name="title" maxlength="256" required="" id="id_title" value="{{ task.title }}">
+                </p>
+                <p class="task-edit__form__content">
+                    内容: <input class="task-edit__form__content" type="text" name="content" id="id_content" value="{{ task.content }}">
+                </p>
+                <p class="task-edit__form__content">
+                    締切: <input class="task-edit__form__content" type="date" name="deadline_0" value="{{ task.deadline | extract_date_from_datetime }}" required="" id="id_deadline_0">
+                <input type="time" name="deadline_1" value="{{ task.deadline | extract_time_from_datetime }}" required="" id="id_deadline_1">
+                </p>
+                <button  class="task-edit__form__content task-edit__submit-btn" type="submit" value="{{ task.pk }}">変更</button>
+            </form>
         {% endfor %}
     {% endif %}    
 </div>
@@ -120,5 +119,5 @@
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{% static 'main/js/my-tasks-popup-settings.js' %}"></script>
-<script src="{% static 'main/js/my-tasks-ajax.js' %}"></script>
+<script type="module" src="{% static 'main/js/my-tasks-ajax.js' %}"></script>
 {% endblock script %}

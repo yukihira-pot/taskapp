@@ -12,7 +12,7 @@ function showElementAtPosition(elementId, x, y) {
     var element = document.getElementById(elementId);
     element.style.display = ((element.style.display != 'none') ? 'none' : 'block');
     if (element) {
-        element.style.left = x + 30 + "px";
+        element.style.left = x + "px";
         element.style.top = y + "px";
     }
 }
@@ -20,15 +20,10 @@ function showElementAtPosition(elementId, x, y) {
 document.addEventListener('click', function(event) {
     event.stopPropagation(); // イベント伝達を防止する
     if (!event.target.classList.contains('task-edit__btn') && !event.target.classList.contains('task-edit__form__content')) {
-        console.log(event.target.classList);
-        console.log("window clicked!" + "element is " + event.target);
         var task_edit__form_elements = document.getElementsByClassName("task-edit__form");
         for (var task_edit__form_element of task_edit__form_elements) {
             task_edit__form_element.style.display = 'none';
         }
-    } else {
-        console.log(event.target.classList);
-        console.log("another elem");
     }
 });
 
