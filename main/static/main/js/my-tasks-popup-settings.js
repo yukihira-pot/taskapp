@@ -12,8 +12,9 @@ function showElementAtPosition(elementId, x, y) {
     var element = document.getElementById(elementId);
     element.style.display = ((element.style.display != 'none') ? 'none' : 'block');
     if (element) {
-        element.style.left = x + "px";
-        element.style.top = y + "px";
+        var elementWidth = element.offsetWidth;
+        element.style.left = (x - elementWidth) + "px";
+        element.style.top = (y - 30) + "px";
     }
 }
 

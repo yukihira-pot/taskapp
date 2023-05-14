@@ -95,7 +95,7 @@
             {% endfor %}
         </table>
         {% for task in my_tasks_list %}
-            <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post" style="display: none; position: absolute;">
+            <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post", style="display: none;">
                 {% csrf_token %}
                 {{ task_form.non_field_errors }}
                 <p class="task-edit__form__content">

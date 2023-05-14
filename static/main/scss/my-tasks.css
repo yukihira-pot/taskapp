@@ -57,10 +57,11 @@ body {
 
 .task-edit__form {
   width: fit-content;
+  position: absolute;
   padding: 10px 0.5%;
   background-color: azure;
-  border: solid 1.5px blue;
-  border-radius: 10%; }
+  border: solid 3px #b7f9f7;
+  border-radius: 5%; }
 
 #settings-image {
   width: 50px;
