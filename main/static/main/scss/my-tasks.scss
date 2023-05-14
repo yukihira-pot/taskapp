@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin-left: 5vw;
     margin-right: 5vw;
@@ -44,6 +48,12 @@ body {
             border: solid 2px aquamarine;
             border-radius: 20%;
         }
+        :hover {
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 3px aquamarine;
+            border-radius: 20%;
+        }
     }
     
     .task-complete-edit__container {
@@ -53,6 +63,12 @@ body {
             width: max-content;
             background-color: rgb(178, 241, 255);
             border: solid 2px rgb(56, 235, 255);
+            border-radius: 20%;
+        }
+        :hover {
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 3px rgb(56, 235, 255);
             border-radius: 20%;
         }
     }
