@@ -1,3 +1,8 @@
+body {
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
 .task__icon {
     border: solid 2px black;
     border-radius: 50%;
@@ -6,27 +11,34 @@
     object-fit: cover;
 }
 
-.task-complete-delete__container {
-    display: flex;
-    .task-complete__btn {
-        margin-bottom: 2px;
-        background-color: rgb(207, 255, 239);
-        border: solid 2px aquamarine;
-        border-radius: 20%;
+#task-table {
+    td {
+        border-top: solid 1px gray;
+        padding: 2px 1vw;
+    }
+    .task-complete-delete__container {
+        display: flex;
+        .task-complete__btn {
+            margin-bottom: 2px;
+            background-color: rgb(207, 255, 239);
+            border: solid 2px aquamarine;
+            border-radius: 20%;
+        }
+    }
+    
+    .task-complete-edit__container {
+        .task-edit__btn {
+            background-color: rgb(178, 241, 255);
+            border: solid 2px rgb(56, 235, 255);
+            border-radius: 20%;
+        }
+    }
+    
+    .task-edit__form {
+        background-color: azure;
     }
 }
 
-.task-complete-edit__container {
-    .task-edit__btn {
-        background-color: rgb(178, 241, 255);
-        border: solid 2px rgb(56, 235, 255);
-        border-radius: 20%;
-    }
-}
-
-.task-edit__form {
-    background-color: azure;
-}
 
 
 #settings-image {

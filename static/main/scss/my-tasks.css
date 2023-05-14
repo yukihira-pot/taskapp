@@ -1,3 +1,7 @@
+body {
+  margin-left: 5vw;
+  margin-right: 5vw; }
+
 .task__icon {
   border: solid 2px black;
   border-radius: 50%;
@@ -5,20 +9,24 @@
   height: 100px;
   object-fit: cover; }
 
-.task-complete-delete__container {
+#task-table td {
+  border-top: solid 1px gray;
+  padding: 2px 1vw; }
+
+#task-table .task-complete-delete__container {
   display: flex; }
-  .task-complete-delete__container .task-complete__btn {
+  #task-table .task-complete-delete__container .task-complete__btn {
     margin-bottom: 2px;
     background-color: #cfffef;
     border: solid 2px aquamarine;
     border-radius: 20%; }
 
-.task-complete-edit__container .task-edit__btn {
+#task-table .task-complete-edit__container .task-edit__btn {
   background-color: #b2f1ff;
   border: solid 2px #38ebff;
   border-radius: 20%; }
 
-.task-edit__form {
+#task-table .task-edit__form {
   background-color: azure; }
 
 #settings-image {

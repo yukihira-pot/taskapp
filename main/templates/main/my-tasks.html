@@ -56,44 +56,55 @@
         <p id="task-notset">タスクはまだ設定されていません</p>
     {% else %}
         <p id="task-set">現在のタスク</p>
-        {% for task in my_tasks_list %}
-            {% if task.is_completed == False %}
-                <ul id="task-{{ task.pk }}">
-                    <li>タイトル: {{ task.title }}</li>
-                    <li>本文: {{ task.content }}</li>
+        <table id="task-table">
+            <tr>
+                <th>タイトル</th>
+                <th>本文</th>
+                <th>締め切り</th>
+                <th>状態</th>
+            </tr>
+            {% for task in my_tasks_list %}
+            <tr>
+                {% if task.is_completed == False %}
+                    <ul id="task-{{ task.pk }}">
 
-                    {% if task.deadline %}
-                        <li>締切: {{ task.deadline }}</li>
-                        {% if task.is_deadline_passed %}
-                            <li>締切を<b>{{ task.remaining_datetime | deadline_passed_elapsed_time }}</b>過ぎています</li>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.content }}</td>
+
+                        {% if task.deadline %}
+                            <td>{{ task.deadline }}</td>
+                            {% if task.is_deadline_passed %}
+                                <td><b>{{ task.remaining_datetime | deadline_passed_elapsed_time }}</b>過ぎています</td>
+                            {% else %}
+                                <td>締切まで: {{ task.remaining_datetime | elapsed_time }}</td>
+                            {% endif %}
                         {% else %}
-                            <li>締切まで: {{ task.remaining_datetime | elapsed_time }}</li>
-                        {% endif %}
-                    {% else %}
-                        <li>締切なし</li>
-                    {% endif %} {# task.deadline #}
+                            <td>締切なし</td>
+                        {% endif %} {# task.deadline #}
 
-                    <li class="task-complete-delete__container">
-                        <form class="task-complete" action="" method="post">
-                            {% csrf_token %}
-                            <button type="submit" value="{{ task.pk }}" class="task-complete__btn">完了</button>
-                        </form>
-                    </li>
-                    <li class="task-complete-edit__container">
-                        <button type="submit" value="{{ task.pk }}" class="task-edit__btn" onclick="toggleVisibility('task-edit__form-{{ task.id }}');">編集</button>
-                        <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post" style="display: none;">
-                            {% csrf_token %}
-                            {{ task_form.non_field_errors }}
-                            <p>タイトル: <input type="text" name="title" maxlength="256" required="" id="id_title" value="{{ task.title }}"></p>
-                            <p>内容: <input type="text" name="content" id="id_content" value="{{ task.content }}"></p>
-                            <p>締切: <input type="date" name="deadline_0" value="{{ task.deadline | extract_date_from_datetime }}" required="" id="id_deadline_0">
-                            <input type="time" name="deadline_1" value="{{ task.deadline | extract_time_from_datetime }}" required="" id="id_deadline_1"></p>
-                            <button type="submit" value="{{ task.pk }}" class="task-edit__submit-btn">変更</button>
-                        </form>
-                    </li>
-                </ul>
-            {% endif %}
-        {% endfor %}
+
+                        <td class="task-complete-delete__container">
+                            <form class="task-complete" action="" method="post">
+                                {% csrf_token %}
+                                <button type="submit" value="{{ task.pk }}" class="task-complete__btn">完了</button>
+                            </form>
+                        </td>
+                        <td class="task-complete-edit__container">
+                            <button type="submit" value="{{ task.pk }}" class="task-edit__btn" onclick="toggleVisibility('task-edit__form-{{ task.id }}');">編集</button>
+                            <form id="task-edit__form-{{ task.id }}" class="task-edit__form" action="" method="post" style="display: none;">
+                                {% csrf_token %}
+                                {{ task_form.non_field_errors }}
+                                <p>タイトル: <input type="text" name="title" maxlength="256" required="" id="id_title" value="{{ task.title }}"></p>
+                                <p>内容: <input type="text" name="content" id="id_content" value="{{ task.content }}"></p>
+                                <p>締切: <input type="date" name="deadline_0" value="{{ task.deadline | extract_date_from_datetime }}" required="" id="id_deadline_0">
+                                <input type="time" name="deadline_1" value="{{ task.deadline | extract_time_from_datetime }}" required="" id="id_deadline_1"></p>
+                                <button type="submit" value="{{ task.pk }}" class="task-edit__submit-btn">変更</button>
+                            </form>
+                        </td>
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </table>
     {% endif %}    
 </div>
 
