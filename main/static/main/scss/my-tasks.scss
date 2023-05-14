@@ -12,14 +12,34 @@ body {
 }
 
 #task-table {
+    width: 80%;
+    margin: 0 auto;
     td {
         border-top: solid 1px gray;
         padding: 2px 1vw;
     }
+    .task-table__header {
+        background-color: rgb(200, 200, 200);
+    }
+    #task-title__header {
+        width: 15%;
+    }
+    #task-content__header {
+        width: 30%;
+    }
+    #task-deadline__header {
+        width: 15%;
+    }
+    #task-status__header {
+        width: 15%;
+    }
+
+
     .task-complete-delete__container {
-        display: flex;
+        width: 1%;
+        border: none;
         .task-complete__btn {
-            margin-bottom: 2px;
+            width: max-content;
             background-color: rgb(207, 255, 239);
             border: solid 2px aquamarine;
             border-radius: 20%;
@@ -27,18 +47,25 @@ body {
     }
     
     .task-complete-edit__container {
+        width: 1%;
+        border: none;
         .task-edit__btn {
+            width: max-content;
             background-color: rgb(178, 241, 255);
             border: solid 2px rgb(56, 235, 255);
             border-radius: 20%;
         }
     }
     
-    .task-edit__form {
-        background-color: azure;
-    }
 }
 
+.task-edit__form {
+    width: fit-content;
+    padding: 10px 0.5%;
+    background-color: azure;
+    border: solid 1.5px blue;
+    border-radius: 10%;
+}
 
 
 #settings-image {

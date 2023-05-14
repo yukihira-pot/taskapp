@@ -9,25 +9,45 @@ body {
   height: 100px;
   object-fit: cover; }
 
-#task-table td {
-  border-top: solid 1px gray;
-  padding: 2px 1vw; }
+#task-table {
+  width: 80%;
+  margin: 0 auto; }
+  #task-table td {
+    border-top: solid 1px gray;
+    padding: 2px 1vw; }
+  #task-table .task-table__header {
+    background-color: #c8c8c8; }
+  #task-table #task-title__header {
+    width: 15%; }
+  #task-table #task-content__header {
+    width: 30%; }
+  #task-table #task-deadline__header {
+    width: 15%; }
+  #task-table #task-status__header {
+    width: 15%; }
+  #task-table .task-complete-delete__container {
+    width: 1%;
+    border: none; }
+    #task-table .task-complete-delete__container .task-complete__btn {
+      width: max-content;
+      background-color: #cfffef;
+      border: solid 2px aquamarine;
+      border-radius: 20%; }
+  #task-table .task-complete-edit__container {
+    width: 1%;
+    border: none; }
+    #task-table .task-complete-edit__container .task-edit__btn {
+      width: max-content;
+      background-color: #b2f1ff;
+      border: solid 2px #38ebff;
+      border-radius: 20%; }
 
-#task-table .task-complete-delete__container {
-  display: flex; }
-  #task-table .task-complete-delete__container .task-complete__btn {
-    margin-bottom: 2px;
-    background-color: #cfffef;
-    border: solid 2px aquamarine;
-    border-radius: 20%; }
-
-#task-table .task-complete-edit__container .task-edit__btn {
-  background-color: #b2f1ff;
-  border: solid 2px #38ebff;
-  border-radius: 20%; }
-
-#task-table .task-edit__form {
-  background-color: azure; }
+.task-edit__form {
+  width: fit-content;
+  padding: 10px 0.5%;
+  background-color: azure;
+  border: solid 1.5px blue;
+  border-radius: 10%; }
 
 #settings-image {
   width: 50px;
