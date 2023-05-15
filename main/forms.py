@@ -3,7 +3,7 @@ from django.utils import timezone
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, Textarea, SplitDateTimeWidget
 
 from .models import Task
 
@@ -42,6 +42,17 @@ class TaskCreationForm(ModelForm):
             "content",
             "deadline",
         )
+        widgets = {
+            'title': TextInput(
+                attrs={'class': 'new-task-form-control', 'id': 'new-task-title'}
+            ),
+            'content': Textarea(
+                attrs={'class': 'new-task-form-control', 'id': 'new-task-content'}
+            ),
+            'deadline': SplitDateTimeWidget(
+                attrs={'class': 'new-task-form-control', 'id': 'new-task-deadline'}
+            ),
+        }
 
 
 class UsernameChangeForm(ModelForm):

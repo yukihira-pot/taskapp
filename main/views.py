@@ -82,6 +82,7 @@ class TaskListView(LoginRequiredMixin, ListView, ModelFormMixin):
     def post(self, request):
         if not "name" in self.request.POST:
             form = TaskCreationForm(self.request.POST)
+            print(form)
             if form.is_valid():
                 form = form.save(commit=False)
                 form.user = self.request.user
@@ -129,12 +130,14 @@ class TaskListView(LoginRequiredMixin, ListView, ModelFormMixin):
 
             if not dt:
                 has_deadline = False
-                return has_deadline, None
+                return has_deadline, None, None, None
             zero = timedelta()
             one_hour = timedelta(hours=1)
             one_day = timedelta(days=1)
             one_week = timedelta(days=7)
             two_weeks = timedelta(days=14)
+            one_month = timedelta(days=30)
+
             if dt < zero:
                 deadline_passed = True
                 if -dt > one_day:
@@ -152,6 +155,10 @@ class TaskListView(LoginRequiredMixin, ListView, ModelFormMixin):
                     remaining_datetime = f"{dt.days}日"
                 elif dt < two_weeks:
                     remaining_datetime = f"1週間と{dt.days - 7}日"
+                elif dt < one_month:
+                    remaining_datetime = f"{dt.days}日"
+                else:
+                    remaining_datetime = f"{dt.days // 30}カ月と{dt.days % 30}日"
             return has_deadline, deadline_passed, remaining_datetime
 
         deadline_dt = timezone.make_aware(datetime.strptime(deadline_str, '%Y-%m-%d %H:%M'))

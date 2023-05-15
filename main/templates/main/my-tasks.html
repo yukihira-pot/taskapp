@@ -35,19 +35,19 @@
 <form action="{% url 'main:my_tasks' %}" method="post">
     {% csrf_token %}
     {{ task_form.non_field_errors }}
-    <div class="form-field">
-        {{ task_form.title.label_tag }}
-        {{ task_form.title }}
-    </div>
-    <div class="form-field">
-        {{ task_form.content.label_tag }}
-        {{ task_form.content }}
-    </div>
-    <div class="form-field">
-        {{ task_form.deadline.label_tag }}
-        {{ task_form.deadline }}
-    </div>
-    <button type="submit">送信</button>
+    <table id="new-task-table">
+        <tr>
+            <th id="new-task-title__header">{{ task_form.title.label_tag }}</th>
+            <th id="new-task-content__header">{{ task_form.content.label_tag }}</th>
+            <th id="new-task-deadline__header">{{ task_form.deadline.label_tag }}</th>
+        </tr>
+        <tr>
+            <td>{{ task_form.title }}</td>
+            <td>{{ task_form.content }}</td>
+            <td>{{ task_form.deadline }}</td>
+            <td><button type="submit">送信</button></td>
+        </tr>
+    </table>
 </form>
 
 <h3>タスク一覧</h3>
@@ -59,8 +59,8 @@
         <table id="task-table">
             <tr>
                 <th class="task-table__header" id="task-title__header">タイトル</th>
-                <th class="task-table__header" id="task-content__header">本文</th>
-                <th class="task-table__header" id="task-deadline__header">締め切り</th>
+                <th class="task-table__header" id="task-content__header">内容</th>
+                <th class="task-table__header" id="task-deadline__header">締切日時</th>
                 <th class="task-table__header" id="task-status__header">状態</th>
             </tr>
             {% for task in my_tasks_list %}

@@ -5,7 +5,7 @@ import datetime
 register = template.Library()
 
 @register.filter
-def elapsed_time(dt):
+def elapsed_time(dt: timedelta):
     if not dt:
         return None
 
@@ -14,6 +14,8 @@ def elapsed_time(dt):
     one_day = timedelta(days=1)
     one_week = timedelta(days=7)
     two_weeks = timedelta(days=14)
+    one_month = timedelta(days=30)
+
     if dt < zero:
         if -dt > one_day:
             passed_time = f"{-dt.days}日"
@@ -31,6 +33,10 @@ def elapsed_time(dt):
             return f"{dt.days}日"
         elif dt < two_weeks:
             return f"1週間と{dt.days - 7}日"
+        elif dt < one_month:
+            return f"{dt.days}日"
+        else:
+            return f"{dt.days // 30}か月と{dt.days % 30}日"
     
 @register.filter
 def deadline_passed_elapsed_time(dt):

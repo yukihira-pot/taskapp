@@ -15,6 +15,51 @@ body {
     object-fit: cover;
 }
 
+#new-task-table {
+    width: 60%;
+    margin-left: 10%;
+    th {
+        width: 10vw;
+        background-color: rgb(219, 219, 219);
+    }
+    #new-task-title__header {
+        width: 15%;
+    }
+    #new-task-content__header {
+        width: 30%;
+    }
+    #new-task-deadline__header {
+        width: 15%;
+    }
+    .new-task-form-control {
+        margin-top: 3px;
+        border: solid 2px rgb(43, 43, 43);
+        border-radius: 5%;
+    }
+    #new-task-title {
+        height: 4vh;
+        padding: 5px;
+    }
+    #new-task-content {
+        height: 10vh;
+        padding: 5px;
+        resize: none;
+    }
+    button {
+        width: 50px;
+        height: 30px;
+        background-color: rgb(255, 182, 46);
+        border-color: orange;
+        border-radius: 20%;
+    }
+    button:hover {
+        font-weight: bold;
+        cursor: pointer;
+        background-color: rgb(255, 186, 59);
+        box-shadow: inset 0 0 0 3px orange;
+    }
+}
+
 #task-table {
     width: 80%;
     margin: 0 auto;
